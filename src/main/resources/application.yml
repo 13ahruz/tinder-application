@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: tinder-application
+
+  profiles:
+    active: local
