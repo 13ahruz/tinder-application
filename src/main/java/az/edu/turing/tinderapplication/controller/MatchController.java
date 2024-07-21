@@ -22,7 +22,7 @@ public class MatchController {
 
     @GetMapping("/match")
     public String toMatchPage(Model model) {
-        List<UserDto> users = userService.getAllUsers(); // Assuming you have this method in your UserService
+        List<UserDto> users = userService.getAllUsers();
         if (!users.isEmpty()) {
             model.addAttribute("user", users.get(currentIndex));
         } else {

@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Like page</title>
+    <title th:text="'Like page - ' + ${user.fullName}">Like page</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
           integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <!-- Bootstrap core CSS -->
@@ -14,6 +14,18 @@
 
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .profile-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+        .text-truncated {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    </style>
 </head>
 <body style="background-color: #f5f5f5;">
 
@@ -22,17 +34,21 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-12 col-lg-12 col-md-12 text-center">
-                    <img src="https://robohash.org/68.186.255.198.png" alt="" class="mx-auto rounded-circle img-fluid">
-                    <h3 class="mb-0 text-truncated">User name</h3>
+                    <img th:src="'data:image/jpeg;base64,' + ${user.profilePhoto}" alt="Profile Photo" class="mx-auto rounded-circle img-fluid profile-photo">
+                    <h3 class="mb-0 text-truncated" th:text="${user.fullName}">User Name</h3>
                     <br>
                 </div>
                 <div class="col-12 col-lg-6">
-                    <button type="button" class="btn btn-outline-danger btn-block"><span class="fa fa-times"></span>
-                        Dislike
-                    </button>
+                    <form action="/api/v1/match/dislike" method="post">
+                        <button type="submit" class="btn btn-outline-danger btn-block"><span class="fa fa-times"></span>
+                            Dislike
+                        </button>
+                    </form>
                 </div>
                 <div class="col-12 col-lg-6">
-                    <button class="btn btn-outline-success btn-block"><span class="fa fa-heart"></span> Like</button>
+                    <form action="/api/v1/match/like" method="post">
+                        <button type="submit" class="btn btn-outline-success btn-block"><span class="fa fa-heart"></span> Like</button>
+                    </form>
                 </div>
                 <!--/col-->
             </div>
