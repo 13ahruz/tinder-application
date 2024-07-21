@@ -27,16 +27,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getNextUser(UserDto userDto) {
-        return null;
-    }
-
-    @Override
-    public boolean addToLikedUsers(UserDto userDto) {
-        return true;
-    }
-
-    @Override
     public UserDto findUserById(UUID id) {
         return UserMapper.INSTANCE.toDto(userRepository.getById(id));
     }

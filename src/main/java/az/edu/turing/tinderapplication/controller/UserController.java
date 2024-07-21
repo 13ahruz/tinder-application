@@ -33,14 +33,4 @@ public class UserController {
         model.addAttribute("user", userDto);
         return "chat";
     }
-
-    @GetMapping("/next")
-    public UserDto getNextUser(@PathVariable("next") UserDto userDto) {
-        return userService.getNextUser(userDto);
-    }
-
-    @PostMapping("/add")
-    public boolean addToLikedUsers(UserDto userDto) {
-        return userService.addToLikedUsers(userDto);
-    }
 }

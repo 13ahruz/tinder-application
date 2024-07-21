@@ -9,9 +9,6 @@ public interface UserService {
 
     List<UserDto> getLikedUsers();
 
-    UserDto getNextUser(UserDto userDto);
-
-    boolean addToLikedUsers(UserDto userDto);
 
     UserDto findUserById (UUID id);
 
