@@ -5,6 +5,7 @@ import az.edu.turing.tinderapplication.domain.model.entity.UserEntity;
 import az.edu.turing.tinderapplication.domain.repository.UserRepository;
 import az.edu.turing.tinderapplication.mapper.UserMapper;
 import az.edu.turing.tinderapplication.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +20,12 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public List<UserDto> getLikedUsers() {
+    public List<UserDto> getLikedUsers(HttpSession session) {
+        UserDto curr = (UserDto) session.getAttribute("currentUser");
         List<UserEntity> allUsers = userRepository.getAll();
         List<UserDto> allUserDto = new ArrayList<>();
         allUsers.forEach(userEntity -> allUserDto.add(UserMapper.INSTANCE.toDto(userEntity)));
+        allUserDto.removeIf(userDto -> userDto.getId() == curr.getId());
         return allUserDto.stream().filter(UserDto::isLiked).toList();
     }
 
