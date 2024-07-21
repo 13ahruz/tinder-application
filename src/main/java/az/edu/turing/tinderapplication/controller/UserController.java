@@ -1,7 +1,9 @@
 package az.edu.turing.tinderapplication.controller;
 
 import az.edu.turing.tinderapplication.domain.model.dto.UserDto;
+import az.edu.turing.tinderapplication.service.AuthService;
 import az.edu.turing.tinderapplication.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import java.util.UUID;
 @RequestMapping("api/v1")
 public class UserController {
     private final UserService userService;
+    HttpSession session;
 
     @GetMapping("/liked")
     public String likedUsers(Model model) {
@@ -27,7 +30,6 @@ public class UserController {
     @GetMapping("/users/{id}")
     public String message(@PathVariable UUID id, Model model){
         UserDto userDto = userService.findUserById(id);
-        System.out.println(userDto.toString());
         model.addAttribute("user", userDto);
         return "chat";
     }

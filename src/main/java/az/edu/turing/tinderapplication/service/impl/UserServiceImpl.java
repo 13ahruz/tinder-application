@@ -40,4 +40,11 @@ public class UserServiceImpl implements UserService {
     public UserDto findUserById(UUID id) {
         return UserMapper.INSTANCE.toDto(userRepository.getById(id));
     }
+
+    @Override
+    public List<UserDto> getAllUsers() {
+        List <UserDto> users = new ArrayList<>();
+        userRepository.getAll().forEach(userEntity -> users.add(UserMapper.INSTANCE.toDto(userEntity)));
+        return users;
+    }
 }

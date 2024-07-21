@@ -3,7 +3,11 @@ package az.edu.turing.tinderapplication.controller;
 import az.edu.turing.tinderapplication.domain.model.LoginRequest;
 import az.edu.turing.tinderapplication.exception.InvalidUserException;
 import az.edu.turing.tinderapplication.service.AuthService;
+import jakarta.servlet.Servlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +23,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class AuthController {
 
     private final AuthService authService;
+    HttpSession session;
+
+
 
     @GetMapping("/index")
     public String homePage() {
@@ -33,11 +40,13 @@ public class AuthController {
 
 
     @PostMapping("/login")
-    public ModelAndView login(@ModelAttribute LoginRequest loginRequest) {
+    public ModelAndView login(@ModelAttribute LoginRequest loginRequest, HttpServletRequest request) {
         String username = loginRequest.getUsername();
         String password = loginRequest.getPassword();
 
         if (isAuthenticate(username, password)) {
+            HttpSession session = request.getSession();
+            session.setAttribute("currentUser", authService.getUserByUsername(username));
             return new ModelAndView("redirect:/api/v1/index");
         } else {
             throw new InvalidUserException("Invalid username or password!");

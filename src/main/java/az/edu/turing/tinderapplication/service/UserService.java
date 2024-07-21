@@ -14,4 +14,6 @@ public interface UserService {
     boolean addToLikedUsers(UserDto userDto);
 
     UserDto findUserById (UUID id);
+
+    List<UserDto> getAllUsers ();
 }

@@ -1,7 +1,10 @@
 package az.edu.turing.tinderapplication.domain.repository.impl;
 
 import az.edu.turing.tinderapplication.config.PostgresConfig;
+import az.edu.turing.tinderapplication.domain.model.dto.UserDto;
+import az.edu.turing.tinderapplication.domain.model.entity.UserEntity;
 import az.edu.turing.tinderapplication.domain.repository.AuthRepository;
+import az.edu.turing.tinderapplication.mapper.DBMapper;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
@@ -28,6 +31,23 @@ public class AuthPostgresRepository implements AuthRepository {
         } catch (Exception e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    @Override
+    public UserEntity getUserByUsername(String username) {
+        try (PreparedStatement statement = conn.prepareStatement("SELECT * FROM USERS WHERE username = ?")){
+            statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return DBMapper.mapResultSetToUserEntity(resultSet);
+            }
+            else {
+                return null;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+            return null;
         }
     }
 }

@@ -2,3 +2,5 @@ server:
   port: 8091
   servlet:
     context-path: /
+    session:
+      timeout: 30m
