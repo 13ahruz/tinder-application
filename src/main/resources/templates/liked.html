@@ -42,19 +42,19 @@
         <tbody>
         <tr th:each="user : ${users}" class="clickable-row">
             <td>
-                <a th:href="@{'/users/' + ${user.id}}" th:text="${user.username}">username</a>
+                <a th:href="@{'/api/v1/users/' + ${user.id}}" th:text="${user.username}">username</a>
             </td>
             <td>
-                <a th:href="@{'/users/' + ${user.id}}" th:text="${user.fullName}">Full Name</a>
+                <a th:href="@{'/api/v1/users/' + ${user.id}}" th:text="${user.fullName}">Full Name</a>
             </td>
             <td>
-                <a th:href="@{'/users/' + ${user.id}}" th:text="${user.lastLoginAt}">Last Login</a>
+                <a th:href="@{'/api/v1/users/' + ${user.id}}" th:text="${user.lastLoginAt}">Last Login</a>
             </td>
             <td>
-                <a th:href="@{'/users/' + ${user.id}}" th:text="${user.lastActiveAt}">Last Active</a>
+                <a th:href="@{'/api/v1/users/' + ${user.id}}" th:text="${user.lastActiveAt}">Last Active</a>
             </td>
             <td>
-                <a th:href="@{'/users/' + ${user.id}}">
+                <a th:href="@{'/api/v1/users/' + ${user.id}}">
                     <img th:src="'data:image/jpeg;base64,' + ${user.profilePhoto}" alt="Profile Photo" width="50" height="50">
                 </a>
             </td>

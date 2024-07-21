@@ -24,6 +24,14 @@ public class UserController {
         return "liked";
     }
 
+    @GetMapping("/users/{id}")
+    public String message(@PathVariable UUID id, Model model){
+        UserDto userDto = userService.findUserById(id);
+        System.out.println(userDto.toString());
+        model.addAttribute("user", userDto);
+        return "chat";
+    }
+
     @GetMapping("/next")
     public UserDto getNextUser(@PathVariable("next") UserDto userDto) {
         return userService.getNextUser(userDto);

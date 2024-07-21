@@ -48,20 +48,6 @@ public class UserPostgresRepository implements UserRepository {
             ResultSet resultSet = query.executeQuery();
             while (resultSet.next()) {
                 userEntities.add(DBMapper.mapResultSetToUserEntity(resultSet));
-//                String username = resultSet.getString("username");
-//                String fullName = resultSet.getString("full_name");
-//                LocalDateTime lastLoginAt = (resultSet.getTimestamp("last_login").toLocalDateTime());
-//                LocalDateTime lastActiveAt = (resultSet.getTimestamp("last_active").toLocalDateTime());
-//                String profilePhoto = resultSet.getString("profile_photo");
-//                boolean liked = resultSet.getBoolean("liked");
-//                UserEntity userEntity = new UserEntity();
-//                userEntity.setUsername(username);
-//                userEntity.setFullName(fullName);
-//                userEntity.setLastLoginAt(lastLoginAt);
-//                userEntity.setLastActiveAt(lastActiveAt);
-//                userEntity.setProfilePhoto(profilePhoto);
-//                userEntity.setLiked(liked);
-//                userEntities.add(userEntity);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -71,10 +57,17 @@ public class UserPostgresRepository implements UserRepository {
 
     @Override
     public UserEntity getById(UUID id) {
-        try (PreparedStatement statement = conn.prepareStatement("SELECT FROM USERS WHERE id = ?")){
+        try (PreparedStatement statement = conn.prepareStatement("SELECT id, username, full_name, last_login, last_active, password, profile_photo, liked FROM USERS WHERE id = ?")){
+            statement.setObject(1, id);
             ResultSet resultSet = statement.executeQuery();
-            return DBMapper.mapResultSetToUserEntity(resultSet);
+            if (resultSet.next()) {
+                return DBMapper.mapResultSetToUserEntity(resultSet);
+            }
+            else{
+                return null;
+            }
         } catch (Exception e){
+            System.out.println("NULLLLLLLLLLLLLLLLLLLLLLL");
             e.printStackTrace();
             return null;
         }
