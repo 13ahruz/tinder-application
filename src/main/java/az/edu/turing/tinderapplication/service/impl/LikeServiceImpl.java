@@ -14,12 +14,12 @@ public class LikeServiceImpl implements LikeService {
     private final LikeRepository likeRepository;
 
     @Override
-    public boolean likeUserById(UUID id) {
-        return likeRepository.likeUserById(id);
+    public void likeUserById(UUID id) {
+        likeRepository.likeUserById(id);
     }
 
     @Override
-    public boolean dislikeUserById(UUID id) {
-        return likeRepository.dislikeUserById(id);
+    public void dislikeUserById(UUID id) {
+        likeRepository.dislikeUserById(id);
     }
 }

@@ -3,11 +3,9 @@ package az.edu.turing.tinderapplication.controller;
 import az.edu.turing.tinderapplication.domain.model.LoginRequest;
 import az.edu.turing.tinderapplication.exception.InvalidUserException;
 import az.edu.turing.tinderapplication.service.AuthService;
-import jakarta.servlet.Servlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,8 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class AuthController {
 
     private final AuthService authService;
-    HttpSession session;
-
 
 
     @GetMapping("/index")

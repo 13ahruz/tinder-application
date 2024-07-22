@@ -6,8 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.UUID;
 
 @Repository
@@ -17,24 +15,22 @@ public class LikeRepositoryImpl implements LikeRepository {
 
     @Override
     public boolean likeUserById(UUID id) {
-        try (PreparedStatement statement = conn.prepareStatement("UPDATE USERS SET liked = TRUE WHERE id = ?"))
-        {
+        try (PreparedStatement statement = conn.prepareStatement("UPDATE USERS SET liked = TRUE WHERE id = ?")) {
             statement.setObject(1, id);
             statement.executeUpdate();
             return true;
-        } catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
 
     @Override
     public boolean dislikeUserById(UUID id) {
-        try (PreparedStatement statement = conn.prepareStatement("UPDATE USERS SET liked = FALSE WHERE id = ?"))
-        {
+        try (PreparedStatement statement = conn.prepareStatement("UPDATE USERS SET liked = FALSE WHERE id = ?")) {
             statement.setObject(1, id);
             statement.executeUpdate();
             return true;
-        } catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }

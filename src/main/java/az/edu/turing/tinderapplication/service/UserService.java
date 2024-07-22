@@ -10,8 +10,7 @@ public interface UserService {
 
     List<UserDto> getLikedUsers(HttpSession session);
 
+    UserDto findUserById(UUID id);
 
-    UserDto findUserById (UUID id);
-
-    List<UserDto> getAllUsers ();
+    List<UserDto> getAllUsers();
 }

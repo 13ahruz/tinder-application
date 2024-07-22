@@ -1,9 +1,7 @@
 package az.edu.turing.tinderapplication.domain.model.entity;
 
 import lombok.Data;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.mapstruct.Mapping;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

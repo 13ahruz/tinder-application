@@ -12,7 +12,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(InvalidUserException.class)
     public String handleInvalidUserException(InvalidUserException e, Model model) {
         model.addAttribute("errorMessage", e.getMessage());
-        model.addAttribute("loginRequest", new LoginRequest());  // Reset login form
+        model.addAttribute("loginRequest", new LoginRequest());
         return "login";
     }
 }

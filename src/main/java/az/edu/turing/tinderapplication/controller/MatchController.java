@@ -27,9 +27,6 @@ public class MatchController {
         UserDto currentUser = (UserDto) session.getAttribute("currentUser");
         List<UserDto> users = userService.getAllUsers();
         if (!users.isEmpty()) {
-//            if (users.get(currentIndex).getId() == currentUser.getId()){
-//                currentIndex = (currentIndex + 1) % users.size();
-//            }
             model.addAttribute("user", users.get(currentIndex));
         } else {
             model.addAttribute("message", "No users available");
@@ -42,7 +39,6 @@ public class MatchController {
         UserDto currentUser = (UserDto) session.getAttribute("currentUser");
         List<UserDto> users = userService.getAllUsers();
 
-        // Filter out the current user from the list
         users.removeIf(user -> user.getId().equals(currentUser.getId()));
 
         if (!users.isEmpty()) {
@@ -61,7 +57,6 @@ public class MatchController {
         UserDto currentUser = (UserDto) session.getAttribute("currentUser");
         List<UserDto> users = userService.getAllUsers();
 
-        // Filter out the current user from the list
         users.removeIf(user -> user.getId().equals(currentUser.getId()));
 
         if (!users.isEmpty()) {
